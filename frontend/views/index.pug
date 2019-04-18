@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div(id="header")
+    h1(class="mdc-typography--headline1") url shortener
+
+  div(class="mdc-layout-grid")
+    div(class="mdc-layout-grid__inner")
+    
+      div(class="mdc-layout-grid__cell--span-6")
+        form(id="form-input" action="/link" method="GET" class="mdc-text-field")
+          input(type="text" name="url" class="mdc-text-field__input")
+          input(type="submit" class="mdc-button")

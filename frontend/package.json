@@ -1,0 +1,32 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "deploy": "gcloud app deploy --quiet",
+    "test": "eslint app.js routes/ logger/ bin/www",
+    "dev": "npm start | bunyan"
+  },
+  "author": {
+    "name": "Google LLC"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/debug-agent": "^3.1.0",
+    "@google-cloud/logging-bunyan": "^0.10.1",
+    "@google-cloud/profiler": "^1.1.2",
+    "@google-cloud/trace-agent": "^3.6.0",
+    "body-parser": "^1.18.3",
+    "bunyan": "^1.8.12",
+    "cookie-parser": "~1.4.3",
+    "debug": "^4.1.1",
+    "express": "^4.16.3",
+    "material-components-web": "^1.1.1",
+    "pug": "^2.0.3",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
