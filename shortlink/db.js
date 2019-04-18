@@ -12,7 +12,7 @@ const mysqlConfig = {
   connectionLimit: 1,
   user: dbUser,
   password: dbPassword,
-  database: dbName,
+  database: dbName
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -44,6 +44,19 @@ function query(sqlString, values) {
   });
 }
 
+function end() {
+  return new Promise((resolve, reject) => {
+    mysqlPool.end((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+}
+
 module.exports = {
+  end,
   query
 };

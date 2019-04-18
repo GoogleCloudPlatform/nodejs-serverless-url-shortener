@@ -15,7 +15,7 @@ limitations under the License.
 */
 'use strict';
 
-const { query } = require('./db');
+const { end, query } = require('./db');
 const logger = require('./logger')
 
 exports.shortLink = async (req, res) => {
@@ -27,4 +27,5 @@ exports.shortLink = async (req, res) => {
     logger.error(e);
     res.status(500).send(e);
   }
+  await end();
 }
