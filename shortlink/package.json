@@ -1,0 +1,23 @@
+{
+  "name": "shortlink",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Create and Fetch shortlinks from CloudSQL",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "gcloud functions deploy shortLink --runtime nodejs10 --trigger-http",
+    "test": "eslint *.js logger/"
+  },
+  "author": {
+    "name": "Google LLC"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/logging-bunyan": "^0.10.1",
+    "bunyan": "^1.8.12",
+    "mysql": "^2.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
