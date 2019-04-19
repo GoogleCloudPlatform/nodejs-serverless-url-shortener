@@ -1,16 +1,15 @@
-const mysql = require('mysql');
 const { query, end } = require('../db');
 
+async function getURL(shortLink) {
+  let results = await query('SELECT * FROM shortlinks where short=?', shortLink);
+  if (results.length) {
+    return results[0].long
+  }
+  return undefined
+}
+
 async function main() {
-  let results;
-  try {
-    results = await query('SELECT * FROM shortlinks where short=' + mysql.escape('f28085d9'));
-    results = JSON.stringify(results);
-  }
-  catch (e) {
-    console.error(e);
-    return;
-  }
+  const results = await getURL('src');
   console.log(results);
   await end();
 }

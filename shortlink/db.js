@@ -44,6 +44,30 @@ function query(sqlString, values) {
   });
 }
 
+async function getURL(shortLink) {
+  let results = await query('SELECT * FROM shortlinks where short=?', shortLink);
+  if (results.length) {
+    return results[0].long
+  }
+  return undefined
+}
+
+async function createShortLink(shortLink, fullURL) {
+  const exists = await getURL(shortLink);
+  if (exists && exists === fullURL) return true;
+  else if (exists) return false;
+  try {
+    const results = await query(stmt, {
+      'short': shortLink,
+      'long': fullURL
+    });
+  }
+  catch (e) {
+    throw new Error(e);
+  }
+  return true;
+}
+
 function end() {
   return new Promise((resolve, reject) => {
     mysqlPool.end((err) => {
@@ -51,12 +75,15 @@ function end() {
         reject(err);
         return;
       }
+      mysqlPool = undefined;
       resolve();
     });
   });
 }
 
 module.exports = {
+  createShortLink,
   end,
+  getURL,
   query
 };

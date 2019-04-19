@@ -1,19 +1,36 @@
-const { query, end } = require('../db');
+const { getURL, query, end } = require('../db');
 
 const stmt = `INSERT INTO \`shortlinks\` SET ?`;
 
-async function main() {
-  let results;
+async function createShortLink(shortLink, fullURL) {
+  const exists = await getURL(shortLink);
+  if (exists && exists === fullURL) return true;
+  else if (exists) return false;
   try {
-    results = await query(stmt, {
-      'short': 'f28085d9',
-      'long': 'https://twitter.com/MylesBorins/status/1108250340045004800'
+    const results = await query(stmt, {
+      'short': shortLink,
+      'long': fullURL
     });
-    results = JSON.stringify(results);
-    console.log(results);
   }
   catch (e) {
-    console.error(e);
+    throw new Error(e);
+  }
+  return true;
+}
+
+async function main() {
+  let result;
+  try {
+    result = await createShortLink('src', 'https://github.com/MylesBorins/nodejs-serverless-url-shortener');
+  }
+  catch (e) {
+    throw new Error(e);
+  }
+  if (!result) {
+    console.log('already exists');
+  }
+  else {
+    console.log('link made');
   }
   await end();
 }
