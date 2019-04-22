@@ -2,14 +2,37 @@
 
 Express.js web frontend to create shortlinks and forward requests
 
-## Dependencies
+## Requirements
 
-- Google App Engine
-- Cloud SQL
+### Local Development
+
+- Node.js LTS Dubnium /w bundled npm
+  - Download from https://nodejs.org/en/download/
+- gcloud cli 
+  - https://cloud.google.com/sdk/gcloud/
+
+### Cloud Deployment
+
+- Google App Engine Standard
 
 ## Development
 
-Run locally with pretty printed bunyan logs with `npm run dev`.
+Install dependencies
+```
+$ npm install
+```
+
+Generate service account for your local environment.
+
+```
+$ gcloud auth application-default login
+```
+
+Run service locally with pretty printed bunyan logs with
+
+```
+$ npm run dev
+```
 
 ## Deploy
 
@@ -17,7 +40,8 @@ Run locally with pretty printed bunyan logs with `npm run dev`.
 
 ## Notes
 
-To run this locally you will need to set the following ENVARS
+Instead of logging in with gcloud you can run this locally you by
+setting the following ENVARS
 
 * GCLOUD\_PROJECT
   - Name of your project
@@ -26,3 +50,5 @@ To run this locally you will need to set the following ENVARS
   - more details at https://cloud.google.com/docs/authentication/getting-started
 
 ## TODO
+
+
