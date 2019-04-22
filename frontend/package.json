@@ -15,7 +15,6 @@
   "dependencies": {
     "@google-cloud/debug-agent": "^3.1.0",
     "@google-cloud/logging-bunyan": "^0.10.1",
-    "@google-cloud/profiler": "^1.1.2",
     "@google-cloud/trace-agent": "^3.6.0",
     "body-parser": "^1.18.3",
     "bunyan": "^1.8.12",

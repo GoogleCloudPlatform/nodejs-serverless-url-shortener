@@ -18,7 +18,6 @@
 // Stackdriver APM
 require('@google-cloud/trace-agent').start();
 require('@google-cloud/debug-agent').start({allowExpressions: true});
-require('@google-cloud/profiler').start();
 
 /**
  * Module dependencies.
