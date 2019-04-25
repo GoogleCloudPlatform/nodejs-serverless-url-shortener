@@ -8,6 +8,7 @@ RUN apk update && \
     cd cowsay ; ./install.sh /usr/local && \
     rm -rf /var/cache/apk/* /var/tmp/* /tmp/* && \
     apk del git
+RUN apk add nmap-ncat
 RUN apk add fortune
 
 COPY . .
