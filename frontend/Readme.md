@@ -22,12 +22,6 @@ Install dependencies
 $ npm install
 ```
 
-Generate service account for your local environment.
-
-```
-$ gcloud auth application-default login
-```
-
 Run service locally with pretty printed bunyan logs with
 
 ```

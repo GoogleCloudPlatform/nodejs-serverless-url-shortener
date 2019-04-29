@@ -15,9 +15,11 @@
  * limitations under the License.
  */
 
-// Stackdriver APM
-require('@google-cloud/trace-agent').start();
-require('@google-cloud/debug-agent').start({allowExpressions: true});
+if (process.env.NODE_ENV === 'production') {
+  // Stackdriver APM
+  require('@google-cloud/trace-agent').start();
+  require('@google-cloud/debug-agent').start({allowExpressions: true});
+}
 
 /**
  * Module dependencies.
