@@ -30,10 +30,15 @@ a {
   text-align: center;
 }
 
-#form-input {
+#form {
   padding: 2em;
 }
 
-#tracking-card {
-  padding: 2em;
+#form-url {
+  min-width: 200px;
+}
+
+.mdl-layout {
+  align-items: center;
+  justify-content: center;
 }
