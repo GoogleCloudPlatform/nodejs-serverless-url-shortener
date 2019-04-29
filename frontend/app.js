@@ -22,7 +22,9 @@ const express = require('express');
 // const favicon = require('serve-favicon');
 const path = require('path');
 
+const link = require('./routes/link');
 const index = require('./routes/index');
+
 const logger = require('./logger');
 
 const app = express();
@@ -39,17 +41,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/link', link);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error(`${req.originalUrl} Not Found`);
+  const err = new Error(`${req.originalUrl} Not Found`);
   err.status = 404;
   logger.warn(err);
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

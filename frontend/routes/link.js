@@ -20,10 +20,17 @@ const express = require('express');
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('index', {
-    title: 'URL Shortener'
+/* handle /link. */
+router.use('/', (req, res, next) => {
+  // TODO validate url
+  if (!req.query.url) {
+    console.log(req);
+    return next(new Error('need to include url parameter'));
+  }
+  // TODO should this forwrard to the rendering page?
+  res.render('link', {
+    title: 'URL Shortener',
+    url: req.query.url
   });
 });
 
