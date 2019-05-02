@@ -15,17 +15,35 @@ limitations under the License.
 */
 'use strict';
 
-const { end, query } = require('./db');
+const {
+  createShortLink,
+  end,
+  getURL
+} = require('./db');
 const logger = require('./logger')
 
-exports.shortLink = async (req, res) => {
+exports.getURL = async (req, res) => {
+  const shortlink = req.query.shortlink || req.body.shortlink;
+  if (!shortlink) {
+    res.status(400).send('Must include shortlink');
+    return;
+  }
+  let result;
   try {
-    const results = await query('SELECT NOW() as now');
-    res.send(JSON.stringify(results));
+    result = await getURL(shortlink);
+    if (!result) {
+      res.status(404).send('shortlink not found');
+    } else {
+      res.send(JSON.stringify(result))
+    }
   }
   catch (e) {
     logger.error(e);
     res.status(500).send(e);
   }
   await end();
+}
+
+exports.createShortLink = async (req, res) => {
+// TODO implement
 }
