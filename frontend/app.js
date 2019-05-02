@@ -26,13 +26,14 @@ const fetch = require('node-fetch');
 
 const index = require('./routes/index');
 const link = require('./routes/link');
+const rewrite = require('./routes/rewrite');
 
 const logger = require('./logger');
 
 const fortuneURL = process.env.FORTUNE_TELLING_COW_URL ||
   'https://fortune-telling-cow-6jtrzyqcoa-uc.a.run.app/';
 
-const app = express();
+const app = express({ mergeParams : true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,8 +46,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/link', link);
+app.use('/:shortlink?', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

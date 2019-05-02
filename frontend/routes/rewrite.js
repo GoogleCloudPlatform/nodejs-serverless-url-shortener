@@ -16,35 +16,25 @@ limitations under the License.
 'use strict';
 
 const express = require('express');
-const fetch = require('node-fetch');
 const logger = require('../logger');
 
-const getShortLinkURL = process.GET_SHORT_LINK_URL ||
-  'https://us-central1-serverless-io-19.cloudfunctions.net/getURL';
+const router = express.Router();
 
-const router = express.Router({ mergeParams : true });
-
-/* GET home page. */
+/* rewrite. */
 router.get('/', async (req, res, next) => {
   const {shortlink} = req.params;
   if (!shortlink) {
-    res.render('index', {
-      title: 'URL Shortener'
-    });
-    return;
-  } else if (shortlink.includes('.')) {
     next();
     return;
   }
-  logger.info(`request received for shortlink: ${shortlink}`)
-  try {
-    const req = await fetch(`${getShortLinkURL}?shortlink=${shortlink}`);
-    const longURL = await req.json();
-    logger.info(`redirecting to: ${longURL}`)
-    res.redirect(longURL);
-  } catch (e) {
-    next(e)
+  logger.info(shortlink);
+  if (shortlink.includes('.')) {
+    next();
+    return;
   }
+  res.render('index', {
+    title: 'URL Shortener'
+  });
 });
 
 module.exports = router;
