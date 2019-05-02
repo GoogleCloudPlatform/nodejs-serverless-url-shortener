@@ -1,4 +1,6 @@
 #!/bin/sh
 
-gcloud builds submit --tag gcr.io/serverless-io-19/fortune-telling-cow
-gcloud beta run deploy --image gcr.io/serverless-io-19/fortune-telling-cow
+PROJECT_ID=$(gcloud config get-value project 2> /dev/null)
+
+gcloud builds submit --tag "gcr.io/$PROJECT_ID/fortune-telling-cow"
+gcloud beta run deploy fortune-telling-cow --image "gcr.io/$PROJECT_ID/fortune-telling-cow"
