@@ -22,10 +22,15 @@ const express = require('express');
 // const favicon = require('serve-favicon');
 const path = require('path');
 
-const link = require('./routes/link');
+const fetch = require('node-fetch');
+
 const index = require('./routes/index');
+const link = require('./routes/link');
 
 const logger = require('./logger');
+
+const fortuneURL = process.env.FORTUNE_TELLING_COW_URL ||
+  'https://fortune-telling-cow-6jtrzyqcoa-uc.a.run.app/';
 
 const app = express();
 
@@ -52,11 +57,16 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(async function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  res.locals.status = err.status;
+  res.locals.fortune = 'Have a nice day!';
+  if (fortuneURL) {
+    try {
+      res.locals.fortune = await fetch(fortuneURL).then(res => res.text());
+    } catch (e) {}
+  }
   // log the error
   if (err.status && err.status !== 404) logger.error(err);
   // render the error page
