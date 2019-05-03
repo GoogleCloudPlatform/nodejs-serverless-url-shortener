@@ -41,6 +41,12 @@ router.use('/', async (req, res, next) => {
     err.status = 400;
     return next(err);
   }
+  
+  if (shortlink && shortlink.search(/^[^!@#$%^&*()+=\[\]{}\\\/:;"'<,>.?]+$/)) {
+    const err = new Error('Invalid shortlink. Cannot use special characters.');
+    err.status = 400;
+    return next(err);
+  }
 
   if (!shortlink) {
     shortlink = crypto.createHash('sha256')
