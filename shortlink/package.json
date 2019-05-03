@@ -5,8 +5,10 @@
   "description": "Create and Fetch shortlinks from CloudSQL",
   "scripts": {
     "start": "node server.js",
+    "deploy": "npm run deploy:getURL && npm run deploy:createShortLink",
     "deploy:getURL": "gcloud functions deploy getURL --runtime nodejs10 --trigger-http",
-    "deploy:createShortLink": "gcloud functions deploy createShortLink --runtime nodejs10 --project=$PROJECT_ID --trigger-http",
+    "deploy:createShortLink": "gcloud functions deploy createShortLink --runtime nodejs10 --project=$PROJECT_ID --trigger-http --env-vars-file .env.yaml",
+    "deploy:setEnvVars": "npm run deploy:getURL --  --env-vars-file .env.yaml && npm run deploy:createShortLink -- --env-vars-file .env.yaml",
     "test": "eslint *.js logger/"
   },
   "author": {

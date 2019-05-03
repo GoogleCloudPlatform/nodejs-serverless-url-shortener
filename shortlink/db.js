@@ -15,7 +15,14 @@ limitations under the License.
 */
 const mysql = require('mysql');
 
-const config = require('./config');
+const logger = require('./logger');
+
+let config;
+try {
+  config = require('./config');
+} catch (e) {
+  config = {};
+}
 
 const connectionName =
   process.env.INSTANCE_CONNECTION_NAME || config.connectionName;
@@ -43,6 +50,7 @@ function query(sqlString, values) {
   // GCF instance. Doing so minimizes the number of active SQL connections,
   // which helps keep your GCF instances under SQL connection limits.
   if (!mysqlPool) {
+    logger.debug('creating sql pool');
     mysqlPool = mysql.createPool(mysqlConfig);
   }
   

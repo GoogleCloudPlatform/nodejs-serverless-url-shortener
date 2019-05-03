@@ -1,3 +1,4 @@
 node_modules
 shortlink/config.json
 cloud_sql_proxy
+.env.yaml
