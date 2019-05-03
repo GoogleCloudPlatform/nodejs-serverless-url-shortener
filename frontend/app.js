@@ -67,13 +67,16 @@ app.use(async function(err, req, res, next) {
       logger.debug('fetching fortune');
       res.locals.fortune = await fetch(fortuneURL).then(res => res.text());
       logger.debug('fortune received');
-    } catch (e) {}
+    } catch (e) {
+      logger.error(e)
+    }
   }
   // log the error
-  if (err.status && err.status !== 404) logger.error(err);
+  if (err.status && err.status !== 404 || err.status !== 422) logger.error(err);
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  next();
 });
 
 module.exports = app;

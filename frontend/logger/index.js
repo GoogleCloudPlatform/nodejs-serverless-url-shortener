@@ -18,19 +18,20 @@
 // [START logging_bunyan_quickstart]
 const bunyan = require('bunyan');
 const production = process.env.NODE_ENV === 'production';
-if (production) {
-  // Imports the Google Cloud client library for Bunyan
-  const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
-  // Creates a Bunyan Stackdriver Logging client
-  const loggingBunyan = new LoggingBunyan();
-}
 
 const streams = [{
   stream: process.stdout,
   level: 'info'
 }];
 
-if (production) streams,push(loggingBunyan.stream('info'));
+if (production) {
+  // Imports the Google Cloud client library for Bunyan
+  const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
+  // Creates a Bunyan Stackdriver Logging client
+  const loggingBunyan = new LoggingBunyan();
+  streams.push(loggingBunyan.stream('info'));
+}
+
 // Create a Bunyan logger that streams to Stackdriver Logging
 // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/bunyan_log"
 const logger = bunyan.createLogger({

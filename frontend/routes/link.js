@@ -16,7 +16,7 @@ limitations under the License.
 'use strict';
 
 const express = require('express');
-// const logger = require('../logger');
+const logger = require('../logger');
 
 const router = express.Router();
 
@@ -24,8 +24,10 @@ const router = express.Router();
 router.use('/', (req, res, next) => {
   // TODO validate url
   if (!req.query.url) {
-    console.log(req);
-    return next(new Error('need to include url parameter'));
+    const err = new Error('need to include url parameter');
+    err.status = 422;
+    logger.warn(err);
+    return next(err);
   }
   // TODO should this forwrard to the rendering page?
   res.render('link', {
