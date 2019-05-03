@@ -26,7 +26,7 @@ exports.getURL = async (req, res) => {
   const shortlink = req.query.shortlink || req.body.shortlink;
   if (!shortlink) {
     logger.warn('shortlink not included in request');
-    res.status(422).send('Must include shortlink');
+    res.status(400).send('Must include shortlink');
     return;
   }
   try {
@@ -50,13 +50,13 @@ exports.createShortLink = async (req, res) => {
   const longlink = req.query.longlink || req.body.longlink;
   if (!longlink) {
     logger.warn('longlink not included in request');
-    res.status(422).send('Must include parameter "longlink" in request.');
+    res.status(400).send('Must include parameter "longlink" in request.');
     return;
   }
   let shortlink = req.query.shortlink || req.body.shortlink;
   if (!shortlink) {
     logger.warn('shortlink not included in request');
-    res.status(422).send('Must include parameter "shortlink" in request.');
+    res.status(400).send('Must include parameter "shortlink" in request.');
     return;
   }
   try {

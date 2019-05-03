@@ -32,7 +32,7 @@ router.use('/', async (req, res, next) => {
 
   if (!url) {
     const err = new Error('need to include "url" parameter');
-    err.status = 422;
+    err.status = 400;
     return next(err);
   }
   
@@ -60,10 +60,10 @@ router.use('/', async (req, res, next) => {
     }
     let result;
     if (process.env.NODE_ENV === 'production') {
-      result = `https://${req.hostname}/${shortlink}`;
+      result = `${req.hostname}/${shortlink}`;
     } else {
       const {port} = res.app.locals;
-      result = `http://${req.hostname}:${port}/${shortlink}`;
+      result = `${req.hostname}:${port}/${shortlink}`;
     }
     logger.info(`shortlink: ${result} created for url: ${url}`);
     res.render('link', {
