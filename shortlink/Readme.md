@@ -1,20 +1,11 @@
-# screenshot
+# shortlink
 
-A Node.js microservice that takes screenshots of a given URL and stores it in Google Cloud Storage.
+A Node.js microservice that creates short links!
 
 ## Dependencies
 
-- A Google Cloud Storage bucket
-
-## Usage
-
-Start with `npm start`
-
-Capture a screenshot with `\<url>`.
-
-## Development
-
-Run locally with pretty printed bunyan logs with `npm run dev`.
+- Cloud SQL
+- Google Cloud Functions
 
 ## Deploy
 
@@ -39,3 +30,11 @@ found in `config-example.json` or set the following environment variables:
   - password for mysql DB
 * SQL\_NAME
   - name of the table
+
+## TODO
+
+- [ ] Local dev with functions framework
+- [ ] Document Cloud SQL Proxy setup
+- [ ] Document creating the DB + migrating
+- [ ] Limit number of functions to max connections to SQL DB
+- [ ] Redis or similar cache in front of DB for gets
