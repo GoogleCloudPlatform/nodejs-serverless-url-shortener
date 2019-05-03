@@ -36,7 +36,7 @@ router.use('/', async (req, res, next) => {
     return next(err);
   }
   
-  if (url.search(/http?s:\/\//) !== 0) {
+  if (url.search(/https?:\/\//) !== 0) {
     const err = new Error('Cannot shorten invalid URL. Must start with http(s)://');
     err.status = 400;
     return next(err);
