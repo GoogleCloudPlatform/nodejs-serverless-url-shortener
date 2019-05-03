@@ -26,16 +26,22 @@ a {
   text-align: center;
 }
 
-#form-title {
-  text-align: center;
+.url,
+.shortlink {
+  display: block;
+  width: 500px;
+  margin: 20px auto;
 }
 
-#form {
-  padding: 2em;
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  margin: auto;
 }
 
-#form-url {
-  min-width: 200px;
+.button-container button {
+  margin: 3px;
 }
 
 #fortune {
@@ -44,10 +50,6 @@ a {
   width: 350px;
 }
 
-.mdl-layout {
-  align-items: center;
-  justify-content: center;
-}
 
 .center {
   text-align: center;

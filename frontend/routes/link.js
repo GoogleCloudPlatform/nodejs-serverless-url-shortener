@@ -28,7 +28,7 @@ const router = express.Router();
 
 /* handle /link. */
 router.use('/', async (req, res, next) => {
-  let {url, shortlink} = req.query;
+  let {url, shortlink} = req.body;
 
   if (!url) {
     const err = new Error('need to include "url" parameter');
