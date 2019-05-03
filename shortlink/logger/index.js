@@ -32,7 +32,7 @@ const logger = bunyan.createLogger({
   name: 'shortlink',
   streams: [
     // Log to the console at 'info' and above
-    {stream: process.stdout, level: 'debug'},
+    {stream: process.stdout, level: 'info'},
     // And log to Stackdriver Logging, logging at 'info' and above
     loggingBunyan.stream('info'),
   ],
