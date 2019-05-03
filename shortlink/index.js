@@ -27,14 +27,17 @@ const logger = require('./logger')
 exports.getURL = async (req, res) => {
   const shortlink = req.query.shortlink || req.body.shortlink;
   if (!shortlink) {
+    logger.warn('shortlink not included in request');
     res.status(422).send('Must include shortlink');
     return;
   }
   try {
     const result = await getURL(shortlink);
     if (result) {
+      logger.info(`shortlink "${shortlink}" found: ${result}`);
       res.send(result);
     } else {
+      logger.warn(`shortlink "${shortlink}" not found.`);
       res.status(404).send(`shortlink "${shortlink}" not found`);
     }
   }
@@ -48,7 +51,8 @@ exports.getURL = async (req, res) => {
 exports.createShortLink = async (req, res) => {
   const longlink = req.query.longlink || req.body.longlink;
   if (!longlink) {
-    res.status(422).send('Must include parameter "longlink" to make short link for.');
+    logger.warn('longlink not included in request');
+    res.status(422).send('Must include parameter "longlink" in request.');
     return;
   }
   let shortlink = req.query.shortlink || req.body.shortlink;
@@ -61,8 +65,10 @@ exports.createShortLink = async (req, res) => {
   try {
     const result = await createShortLink(shortlink, longlink);
     if (result) {
+      logger.info(`shortlink "${shortlink}" created for ${longlink}`);
       res.send(shortlink);
     } else {
+      logger.warn(`shortlink "${shortlink}" already exists.`);
       res.status(409).send(`shortlink "${shortlink}" already exists.`);
     }
   } catch (e) {

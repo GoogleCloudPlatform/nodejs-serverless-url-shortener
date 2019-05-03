@@ -57,11 +57,13 @@ function query(sqlString, values) {
   if (!values) values = [];
 
   return new Promise((resolve, reject) => {
+    logger.debug('sending sql query');
     mysqlPool.query(sqlString, values, (err, results) => {
       if (err) {
         reject(err);
         return;
       }
+      logger.debug('query succeeded');
       resolve(results);
     });
   });
@@ -72,7 +74,7 @@ async function getURL(shortlink) {
   if (results.length) {
     return results[0].long
   }
-  return undefined
+  return undefined;
 }
 
 async function createShortLink(shortlink, longlink) {
@@ -93,12 +95,14 @@ async function createShortLink(shortlink, longlink) {
 
 function end() {
   return new Promise((resolve, reject) => {
+    logger.debug('ending sql pool');
     mysqlPool.end((err) => {
       if (err) {
         reject(err);
         return;
       }
       mysqlPool = undefined;
+      logger.debug('sql pool ended');
       resolve();
     });
   });
