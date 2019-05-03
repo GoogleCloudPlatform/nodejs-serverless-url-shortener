@@ -58,8 +58,13 @@ router.use('/', async (req, res, next) => {
       err.status = response.status;
       return next(err);
     }
-    const {port} = res.app.locals;
-    const result = `https://${req.hostname}${port === 80 || port === 443 ? '': ':' + port}/${shortlink}`;
+    let result;
+    if (process.env.NODE_ENV === 'production') {
+      result = `https://${req.hostname}/${shortlink}`;
+    } else {
+      const {port} = res.app.locals;
+      result = `http://${req.hostname}:${port}/${shortlink}`;
+    }
     logger.info(`shortlink: ${result} created for url: ${url}`);
     res.render('link', {
       title: 'URL Shortener',
