@@ -20,3 +20,8 @@ $ ./test.sh
 ```
 $ ./deploy.sh
 ```
+
+## TODO
+
+- [ ] Deploy via locally built container
+- [ ] Better fortunes
