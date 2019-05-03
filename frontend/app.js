@@ -64,7 +64,9 @@ app.use(async function(err, req, res, next) {
   res.locals.fortune = 'Have a nice day!';
   if (fortuneURL) {
     try {
+      logger.debug('fetching fortune');
       res.locals.fortune = await fetch(fortuneURL).then(res => res.text());
+      logger.debug('fortune received');
     } catch (e) {}
   }
   // log the error
