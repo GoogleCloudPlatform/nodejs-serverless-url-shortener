@@ -26,17 +26,20 @@ a {
   text-align: center;
 }
 
+#form {
+  width: 100%; max-width: 500px;
+}
+
 .url,
 .shortlink {
   display: block;
-  width: 100%; max-width: 500px;
   margin: 20px auto;
 }
 
 .button-container {
   display: flex;
   justify-content: flex-end;
-  width: 500px;
+  width: 100%; max-width: 500px;
   margin: auto;
 }
 
@@ -52,4 +55,13 @@ a {
 
 .center {
   text-align: center;
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 75vh;
 }
