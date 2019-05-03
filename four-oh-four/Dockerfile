@@ -15,6 +15,6 @@ COPY . .
 
 ENV PATH="/usr/games:${PATH}"
 
-CMD ["./server.sh"]
+CMD ["./serve.sh"]
 
 EXPOSE 8080
