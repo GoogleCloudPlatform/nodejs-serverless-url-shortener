@@ -32,10 +32,7 @@ $ npm run dev
 
 `npm run deploy`
 
-## Notes
-
-Coming Soon
-
 ## TODO
 
-Coming Soon
+- [] Abstract out explicit URLs to functions
+- [] Improve handling of :shortlink
