@@ -47,7 +47,16 @@ router.get('/', async (req, res, next) => {
       err.status = response.status;
       return next(err);
     }
+    
+    const orgin = `${req.hostname}/${shortlink}`;
+    
+    if (message.includes(orgin)) {
+      const err = new Error('Nice try you clever dan. Recursion is not supported');
+      err.status = 400;
+      return next(err);
+    }
 
+    logger.info()
     logger.info(`redirecting to: ${message}`)
     res.redirect(message);
   } catch (e) {
