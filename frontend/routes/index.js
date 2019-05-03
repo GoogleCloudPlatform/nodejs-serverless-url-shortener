@@ -38,12 +38,13 @@ router.get('/', async (req, res, next) => {
   }
   logger.info(`request received for shortlink: ${shortlink}`)
   try {
-    const req = await fetch(`${getShortLinkURL}?shortlink=${shortlink}`);
-    const message = await req.text();
+    logger.info(`fetching url for shortlink: ${shortlink}`)
+    const response = await fetch(`${getShortLinkURL}?shortlink=${shortlink}`);
+    const message = await response.text();
 
-    if (req.status !== 200) {
+    if (response.status !== 200) {
       const err = new Error(message)
-      err.status = req.status;
+      err.status = response.status;
       return next(err);
     }
 
