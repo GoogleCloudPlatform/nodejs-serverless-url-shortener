@@ -26,7 +26,6 @@ const fetch = require('node-fetch');
 
 const index = require('./routes/index');
 const link = require('./routes/link');
-const rewrite = require('./routes/rewrite');
 
 const logger = require('./logger');
 
