@@ -34,15 +34,8 @@ $ npm run dev
 
 ## Notes
 
-Instead of logging in with gcloud you can run this locally you by
-setting the following ENVARS
-
-* GCLOUD\_PROJECT
-  - Name of your project
-* GOOGLE\_APPLICATION\_CREDENTIALS
-  - Path to local service account credentials
-  - more details at https://cloud.google.com/docs/authentication/getting-started
+Coming Soon
 
 ## TODO
 
-
+Coming Soon

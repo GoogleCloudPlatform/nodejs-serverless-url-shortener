@@ -38,7 +38,17 @@ a {
   min-width: 200px;
 }
 
+#fortune {
+  margin: auto;
+  width: 50%;
+  width: 350px;
+}
+
 .mdl-layout {
   align-items: center;
   justify-content: center;
+}
+
+.center {
+  text-align: center;
 }

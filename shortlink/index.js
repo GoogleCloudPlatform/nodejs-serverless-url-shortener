@@ -15,8 +15,6 @@ limitations under the License.
 */
 'use strict';
 
-const crypto = require('crypto');
-
 const {
   createShortLink,
   end,
@@ -57,10 +55,9 @@ exports.createShortLink = async (req, res) => {
   }
   let shortlink = req.query.shortlink || req.body.shortlink;
   if (!shortlink) {
-    shortlink = crypto.createHash('sha256')
-                      .update(longlink)
-                      .digest('hex')
-                      .slice(0,7);
+    logger.warn('shortlink not included in request');
+    res.status(422).send('Must include parameter "shortlink" in request.');
+    return;
   }
   try {
     const result = await createShortLink(shortlink, longlink);

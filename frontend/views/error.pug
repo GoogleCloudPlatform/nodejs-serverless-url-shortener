@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h2(class="mdc-typography--headline2") #{status} #{message}
-  pre= fortune
+  h3(class="mdc-typography--headline3 center") #{message}
+  h4(class="mdc-typography--headline4 center") #{status} #{status} #{status} #{status} #{status} #{status}
+  
+  pre(id="fortune")= fortune
+  
+  h4(class="mdc-typography--headline4 center") #{status} #{status} #{status} #{status} #{status} #{status}

@@ -14,22 +14,41 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 'use strict';
+const crypto = require('crypto');
 
 const express = require('express');
+
 const logger = require('../logger');
+
+// const createShortLinkURL = 'https://us-central1-serverless-io-19.cloudfunctions.net/createShortLink';
 
 const router = express.Router();
 
 /* handle /link. */
-router.use('/', (req, res, next) => {
-  // TODO validate url
-  if (!req.query.url) {
-    const err = new Error('need to include url parameter');
+router.use('/', async (req, res, next) => {
+  let {url, shortlink} = req.query;
+
+  if (!url) {
+    const err = new Error('need to include "url" parameter');
     err.status = 422;
-    logger.warn(err);
     return next(err);
   }
-  // TODO should this forwrard to the rendering page?
+  
+  if (url.search(/http?s:\/\//) !== 0) {
+    const err = new Error('Cannot shorten invalid URL. Must start with http(s)://');
+    err.status = 400;
+    return next(err);
+  }
+
+  if (!shortlink) {
+    shortlink = crypto.createHash('sha256')
+                      .update(url)
+                      .digest('hex')
+                      .slice(0,7);
+  }
+
+  logger.info(`creating shortlink: ${shortlink} for url: ${url}`);
+  
   res.render('link', {
     title: 'URL Shortener',
     url: req.query.url
