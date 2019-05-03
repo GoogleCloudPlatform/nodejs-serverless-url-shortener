@@ -52,7 +52,7 @@ router.use('/', async (req, res, next) => {
   try {
     logger.info(`creating shortlink: ${shortlink} for url: ${url}`);
     const response = await fetch(`${createShortLinkURL}?shortlink=${shortlink}&longlink=${url}`);
-    
+    const message = await response.text();
     if (response.status !== 200) {
       const err = new Error(message)
       err.status = response.status;
