@@ -15,6 +15,8 @@ limitations under the License.
 */
 'use strict';
 
+const crypto = require('crypto');
+
 const {
   createShortLink,
   end,
@@ -25,16 +27,15 @@ const logger = require('./logger')
 exports.getURL = async (req, res) => {
   const shortlink = req.query.shortlink || req.body.shortlink;
   if (!shortlink) {
-    res.status(400).send('Must include shortlink');
+    res.status(422).send('Must include shortlink');
     return;
   }
-  let result;
   try {
-    result = await getURL(shortlink);
-    if (!result) {
-      res.status(404).send(`shortlink "${shortlink}" not found`);
+    const result = await getURL(shortlink);
+    if (result) {
+      res.send(result);
     } else {
-      res.send(result)
+      res.status(404).send(`shortlink "${shortlink}" not found`);
     }
   }
   catch (e) {
@@ -45,5 +46,28 @@ exports.getURL = async (req, res) => {
 }
 
 exports.createShortLink = async (req, res) => {
-// TODO implement
+  const longlink = req.query.longlink || req.body.longlink;
+  if (!longlink) {
+    res.status(422).send('Must include parameter "longlink" to make short link for.');
+    return;
+  }
+  let shortlink = req.query.shortlink || req.body.shortlink;
+  if (!shortlink) {
+    shortlink = crypto.createHash('sha256')
+                      .update(longlink)
+                      .digest('hex')
+                      .slice(0,7);
+  }
+  try {
+    const result = await createShortLink(shortlink, longlink);
+    if (result) {
+      res.send(shortlink);
+    } else {
+      res.status(409).send(`shortlink "${shortlink}" already exists.`);
+    }
+  } catch (e) {
+    logger.error(e);
+    res.status(500).send(e);
+  }
+  await end();
 }

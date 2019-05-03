@@ -67,22 +67,22 @@ function query(sqlString, values) {
   });
 }
 
-async function getURL(shortLink) {
-  let results = await query('SELECT * FROM shortlinks where short=?', shortLink);
+async function getURL(shortlink) {
+  let results = await query('SELECT * FROM shortlinks where short=?', shortlink);
   if (results.length) {
     return results[0].long
   }
   return undefined
 }
 
-async function createShortLink(shortLink, fullURL) {
-  const exists = await getURL(shortLink);
-  if (exists && exists === fullURL) return true;
+async function createShortLink(shortlink, longlink) {
+  const exists = await getURL(shortlink);
+  if (exists && exists === longlink) return true;
   else if (exists) return false;
   try {
-    const results = await query(stmt, {
-      'short': shortLink,
-      'long': fullURL
+    await query(`INSERT INTO \`shortlinks\` SET ?`, {
+      'short': shortlink,
+      'long': longlink
     });
   }
   catch (e) {

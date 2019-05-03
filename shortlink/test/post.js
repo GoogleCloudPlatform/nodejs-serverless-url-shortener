@@ -17,14 +17,14 @@ const { getURL, query, end } = require('../db');
 
 const stmt = `INSERT INTO \`shortlinks\` SET ?`;
 
-async function createShortLink(shortLink, fullURL) {
+async function createShortLink(shortLink, longLink) {
   const exists = await getURL(shortLink);
-  if (exists && exists === fullURL) return true;
+  if (exists && exists === longLink) return true;
   else if (exists) return false;
   try {
     const results = await query(stmt, {
       'short': shortLink,
-      'long': fullURL
+      'long': longLink
     });
   }
   catch (e) {

@@ -14,4 +14,5 @@
 .gitignore
 config*
 node_modules
-.env.yaml
+.env*
+.eslintrc.yaml
