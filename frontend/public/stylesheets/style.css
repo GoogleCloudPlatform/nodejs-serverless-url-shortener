@@ -49,3 +49,7 @@ a {
   width: 50%;
   width: 350px;
 }
+
+.center {
+  text-align: center;
+}
