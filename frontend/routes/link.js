@@ -55,6 +55,14 @@ router.use('/', async (req, res, next) => {
                       .slice(0,7);
   }
 
+  const orgin = `${req.hostname}/${shortlink}`;
+  
+  if (url.includes(orgin)) {
+    const err = new Error('Nice try you clever dan. Recursion is not supported');
+    err.status = 400;
+    return next(err);
+  }
+
   try {
     logger.info(`creating shortlink: ${shortlink} for url: ${url}`);
     const response = await fetch(`${createShortLinkURL}?shortlink=${shortlink}&longlink=${url}`);
