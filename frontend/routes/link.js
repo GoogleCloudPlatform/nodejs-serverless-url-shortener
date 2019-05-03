@@ -60,10 +60,10 @@ router.use('/', async (req, res, next) => {
     }
     let result;
     if (process.env.NODE_ENV === 'production') {
-      result = `${req.hostname}/${shortlink}`;
+      result = `https://${req.hostname}/${shortlink}`;
     } else {
       const {port} = res.app.locals;
-      result = `${req.hostname}:${port}/${shortlink}`;
+      result = `http://${req.hostname}:${port}/${shortlink}`;
     }
     logger.info(`shortlink: ${result} created for url: ${url}`);
     res.render('link', {

@@ -14,7 +14,7 @@
  */
 
 body {
-  padding: 50px;
+  padding: 16px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -29,7 +29,7 @@ a {
 .url,
 .shortlink {
   display: block;
-  width: 500px;
+  width: 100%; max-width: 500px;
   margin: 20px auto;
 }
 
@@ -48,9 +48,4 @@ a {
   margin: auto;
   width: 50%;
   width: 350px;
-}
-
-
-.center {
-  text-align: center;
 }
