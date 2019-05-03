@@ -52,7 +52,6 @@ app.use('/:shortlink?', index);
 app.use(function(req, res, next) {
   const err = new Error(`${req.originalUrl} Not Found`);
   err.status = 404;
-  logger.warn(err);
   next(err);
 });
 
@@ -72,7 +71,8 @@ app.use(async function(err, req, res, next) {
     }
   }
   // log the error
-  if (err.status && err.status !== 404 || err.status !== 422) logger.error(err);
+  if (err.status && /4[0-9][0-9]/.test(err.status)) logger.warn(err);
+  else if (err.status) logger.error(err);
   // render the error page
   res.status(err.status || 500);
   res.render('error');

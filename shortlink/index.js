@@ -32,9 +32,9 @@ exports.getURL = async (req, res) => {
   try {
     result = await getURL(shortlink);
     if (!result) {
-      res.status(404).send('shortlink not found');
+      res.status(404).send(`shortlink "${shortlink}" not found`);
     } else {
-      res.send(JSON.stringify(result))
+      res.send(result)
     }
   }
   catch (e) {
