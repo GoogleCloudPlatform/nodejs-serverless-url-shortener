@@ -17,10 +17,12 @@ limitations under the License.
 const crypto = require('crypto');
 
 const express = require('express');
+const fetch = require('node-fetch');
 
 const logger = require('../logger');
 
-// const createShortLinkURL = 'https://us-central1-serverless-io-19.cloudfunctions.net/createShortLink';
+const createShortLinkURL = process.CREATE_SHORT_LINK_URL ||
+  'https://us-central1-serverless-io-19.cloudfunctions.net/createShortLink';
 
 const router = express.Router();
 
@@ -47,12 +49,25 @@ router.use('/', async (req, res, next) => {
                       .slice(0,7);
   }
 
-  logger.info(`creating shortlink: ${shortlink} for url: ${url}`);
-  
-  res.render('link', {
-    title: 'URL Shortener',
-    url: req.query.url
-  });
+  try {
+    logger.info(`creating shortlink: ${shortlink} for url: ${url}`);
+    const response = await fetch(`${createShortLinkURL}?shortlink=${shortlink}&longlink=${url}`);
+    
+    if (response.status !== 200) {
+      const err = new Error(message)
+      err.status = response.status;
+      return next(err);
+    }
+    const {port} = res.app.locals;
+    const result = `https://${req.hostname}${port === 80 || port === 443 ? '': ':' + port}/${shortlink}`;
+    logger.info(`shortlink: ${result} created for url: ${url}`);
+    res.render('link', {
+      title: 'URL Shortener',
+      url: result
+    });
+  } catch (e) {
+    next(e)
+  }
 });
 
 module.exports = router;
