@@ -36,3 +36,4 @@ $ npm run dev
 
 - [] Abstract out explicit URLs to functions
 - [] Improve handling of :shortlink
+- [] fix the symlinks
