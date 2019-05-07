@@ -20,5 +20,5 @@ ncat -lk -p $PORT --sh-exec '
  echo "HTTP/1.0 200 Ok";
  echo "Content-Type: text/plain;charset=UTF-8";
  echo;
- fortune | cowsay
+ fortune third_party/fortunes/wholesome | cowsay
  echo;'

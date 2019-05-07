@@ -13,6 +13,8 @@ RUN apk add fortune
 
 COPY . .
 
+RUN strfile -c % third_party/fortunes/wholesome
+
 ENV PATH="/usr/games:${PATH}"
 
 CMD ["./serve.sh"]
