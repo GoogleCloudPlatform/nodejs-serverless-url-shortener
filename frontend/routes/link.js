@@ -81,7 +81,7 @@ router.use('/', async (req, res, next) => {
     }
     logger.info(`shortlink: ${result} created for url: ${url}`);
     res.render('link', {
-      title: 'URL Shortener',
+      title: 'Success!',
       url: result
     });
   } catch (e) {

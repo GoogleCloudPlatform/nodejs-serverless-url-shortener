@@ -75,7 +75,9 @@ app.use(async function(err, req, res, next) {
   else if (err.status) logger.error(err);
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    title: 'Error!'
+  });
   next();
 });
 
