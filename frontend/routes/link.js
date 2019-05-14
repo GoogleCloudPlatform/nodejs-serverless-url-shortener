@@ -52,7 +52,7 @@ router.use('/', async (req, res, next) => {
     shortlink = crypto.createHash('sha256')
                       .update(url)
                       .digest('hex')
-                      .slice(0,7);
+                      .slice(0,5);
   }
 
   const orgin = `${req.hostname}/${shortlink}`;
