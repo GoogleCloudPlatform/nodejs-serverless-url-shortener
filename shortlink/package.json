@@ -16,7 +16,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/logging-bunyan": "^0.10.1",
+    "@google-cloud/logging-bunyan": "^1.2.3",
     "bunyan": "^1.8.12",
     "mysql": "^2.17.0"
   },
