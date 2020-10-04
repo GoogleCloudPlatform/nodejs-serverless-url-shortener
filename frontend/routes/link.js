@@ -55,9 +55,9 @@ router.use('/', async (req, res, next) => {
                       .slice(0,5);
   }
 
-  const orgin = `${req.hostname}/${shortlink}`;
+  const origin = `${req.hostname}/${shortlink}`;
   
-  if (url.includes(orgin)) {
+  if (url.includes(origin)) {
     const err = new Error('Nice try you clever dan. Recursion is not supported');
     err.status = 400;
     return next(err);
