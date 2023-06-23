@@ -13,9 +13,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/debug-agent": "^4.0.4",
-    "@google-cloud/logging-bunyan": "^1.2.3",
-    "@google-cloud/trace-agent": "^4.2.2",
+    "@google-cloud/debug-agent": "^4.2.2",
+    "@google-cloud/logging-bunyan": "^4.2.2",
+    "@google-cloud/trace-agent": "^4.2.5",
     "body-parser": "^1.18.3",
     "bunyan": "^1.8.12",
     "cookie-parser": "~1.4.3",
@@ -27,6 +27,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0"
+    "eslint": "^8.43.0"
   }
 }
