@@ -20,7 +20,7 @@
     "bunyan": "^1.8.12",
     "cookie-parser": "~1.4.3",
     "debug": "^4.1.1",
-    "express": "^4.16.3",
+    "express": "^4.19.2",
     "material-components-web": "^1.1.1",
     "node-fetch": "^2.5.0",
     "pug": "^2.0.3",
