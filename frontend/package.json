@@ -27,6 +27,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0"
+    "eslint": "^10.1.0"
   }
 }
